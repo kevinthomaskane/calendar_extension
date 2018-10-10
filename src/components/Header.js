@@ -34,7 +34,7 @@ class Header extends Component {
 
   activeYear = (el) => {
     const element = document.querySelector(`a[data-year="${el}"]`)
-    element.setAttribute("style", "color: black; font-weight: bold;")
+    element.setAttribute("style", "color: black; font-weight: 700; text-decoration: underline;")
   }
 
   render() {

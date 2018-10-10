@@ -4,10 +4,23 @@ import { connect } from "react-redux";
 import { currentDate } from "../actions/calendar";
 
 class Calendar extends Component {
+  state = {
+    year_change: false
+  };
   componentWillReceiveProps(nextProps) {
+    if (nextProps.selected_year !== +this.props.current_date.split("/")[2]) {
+      this.setState({ year_change: true });
+    }
     this.props.currentDate();
-    this.highlightDay();
   }
+
+//   componentDidMount() {
+//     this.highlightDay();
+//   }
+
+//   componentDidUpdate() {
+//     this.highlightDay();
+//   }
 
   mapDatesObject = () => {
     const dates = this.props.days;
@@ -39,36 +52,46 @@ class Calendar extends Component {
     return months[this.props.month - 1];
   };
 
-  highlightDay = () => {
-    const current_date = this.props.current_date;
-    if (+current_date.split("/")[2] === this.props.selected_year) {
-      let day = document.querySelector(
-        `.calendar__day[data-fulldate="${current_date}"]`
-      );
-      console.log(day)
-      day.style.border = "solid 1px red";
-    }
-  };
+//   highlightDay = () => {
+//     const current_date = this.props.current_date;
+//     const day =
+//       document.querySelector(
+//         `.calendar__day[data-fulldate="${current_date}"]`
+//       ) || null;
+//     console.log(day, current_date);
+//     if (!this.state.year_change) {
+//       day.style.border = "solid 1px red";
+//     }
+//   };
 
   render() {
     const days = this.mapDatesObject();
+    
     return (
       <div className="calendar">
         <div className="calendar__month">{this.getMonth()}</div>
+        <div className="calendar__days">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
         {days.map((el, i) => {
           return (
             <div
-              className={i === 0 ? "calendar__day " + el.day : "calendar__day"}
+              className={i === 0 ? `calendar__day ${el.day}` : "calendar__day"}
               data-num={el.num}
               data-day={el.day}
               data-year={this.props.selected_year}
               data-fulldate={
-                this.props.month + "/" + el.num + "/" + this.props.selected_year
+                this.props.month + "/" + el.num + "/" + this.props.selected_year === this.props.current_date ? "border" : "no-border"
               }
               key={i}
             >
               <div className="calendar__day--number">{el.num}</div>
-              <div className="calendar__day--day">{el.day}</div>
             </div>
           );
         })}

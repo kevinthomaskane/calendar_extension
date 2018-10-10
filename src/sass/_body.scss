@@ -1,7 +1,9 @@
 .body {
-  padding: 15px;
-  padding-top: 45px;
+  padding: 1.5rem;
+  padding-top: 4.5rem;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  background: rgb(50, 50, 50);
+  height: calc(100% - 38px);
 }
