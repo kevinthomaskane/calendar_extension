@@ -9,7 +9,7 @@ class Header extends Component {
     year_range: []
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.getDateRange(this.state.selected_year).then(range => {
       this.props.changeYear(this.state.selected_year);
       this.props.changeRange(range);
@@ -70,8 +70,8 @@ Header.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  selected_year: state.year,
-  years_range: state.years_range
+  selected_year: state.header.year,
+  years_range: state.header.years_range
 });
 
 export default connect(

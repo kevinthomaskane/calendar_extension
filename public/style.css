@@ -7,9 +7,61 @@
     padding: 10px;
     color: #777; }
 
+.body {
+  padding: 15px;
+  padding-top: 45px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap; }
+
+.calendar {
+  width: 30%;
+  height: 160px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 4px #cacaca;
+  font-size: 8px;
+  margin: 0 auto 35px;
+  position: relative; }
+  .calendar__month {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px; }
+  .calendar__day {
+    width: calc((100% / 7) - 4px);
+    height: calc((100% / 6) - 7px);
+    margin: 1px;
+    position: relative;
+    border: solid 1px #c4c4c4;
+    padding-top: 3px; }
+    .calendar__day--number, .calendar__day--day {
+      text-align: center;
+      display: block; }
+
+.mon {
+  margin-left: calc((100% / 6.98)); }
+
+.tue {
+  margin-left: calc((100% / 6.98) * 2); }
+
+.wed {
+  margin-left: calc((100% / 6.98) * 3); }
+
+.thu {
+  margin-left: calc((100% / 6.98) * 4); }
+
+.fri {
+  margin-left: calc((100% / 6.98) * 5); }
+
+.sat {
+  margin-left: calc((100% / 6.98) * 6); }
+
 body {
-  max-width: 750px;
+  max-width: 950px;
   box-sizing: border-box;
-  height: 600px;
+  height: 700px;
   border: solid 1px black;
   margin: 0 auto; }

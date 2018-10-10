@@ -1,9 +1,11 @@
 @import "header";
+@import "body";
+@import "calendar-container";
 
 body {
-  max-width: 750px;
+  max-width: 950px;
   box-sizing: border-box;
-  height: 600px;
+  height: 700px;
   border: solid 1px black;
   margin: 0 auto;
 }

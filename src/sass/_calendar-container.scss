@@ -1,0 +1,50 @@
+.calendar {
+  width: 30%;
+  height: 160px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 4px rgb(202, 202, 202);
+  font-size: 8px;
+  margin: 0 auto 35px;
+  position: relative;
+  &__month {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+  }
+  &__day {
+    width: calc((100% / 7) - 4px);
+    height: calc((100% / 6) - 7px);
+    margin: 1px;
+    position: relative;
+    border: solid 1px rgb(196, 196, 196);
+    padding-top: 3px;
+    &--number,
+    &--day {
+      text-align: center;
+      display: block;
+    }
+  }
+}
+
+.mon {
+    margin-left: calc((100% / 6.98))
+}
+.tue {
+    margin-left: calc((100% / 6.98) * 2)
+}
+.wed {
+    margin-left: calc((100% / 6.98) * 3)
+}
+.thu {
+    margin-left: calc((100% / 6.98) * 4)
+}
+.fri {
+    margin-left: calc((100% / 6.98) * 5)
+}
+.sat {
+    margin-left: calc((100% / 6.98) * 6)
+}
