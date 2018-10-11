@@ -17,8 +17,7 @@
   height: calc(100% - 38px); }
 
 .calendar {
-  width: 22%;
-  height: auto;
+  height: 147px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -55,7 +54,8 @@
     position: relative;
     border: solid 1px #f6f6f6;
     background: #f6f6f6;
-    cursor: pointer; }
+    cursor: pointer;
+    position: relative; }
     .calendar__day:hover {
       background: #d9d9d9; }
     .calendar__day--number {
@@ -83,10 +83,83 @@
   margin-left: calc(((100% / 7) * 6) + 1px); }
 
 div[data-fulldate="border"] {
-  border: solid 1px red; }
+  background: #bafcff; }
 
 div[data-fulldate="no-border"] {
   border: solid 1px #f6f6f6; }
+
+.modal__container {
+  width: 400px;
+  height: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background: #323232;
+  transition: all 0.3s ease-in;
+  transition-delay: .2s;
+  color: white;
+  padding: 10px;
+  border-radius: 2px;
+  z-index: 4; }
+  .modal__container--header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px; }
+    .modal__container--header-day::first-letter {
+      text-transform: uppercase; }
+    .modal__container--header div:last-child {
+      cursor: pointer; }
+
+.modal-background {
+  z-index: 3;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100%;
+  height: 100%;
+  transition: all .2s ease-out 0s;
+  background: rgba(254, 254, 254, 0.8);
+  overflow: hidden; }
+
+.show-bg {
+  transform: translate(-50%, -50%) scale(1); }
+
+.hide-bg {
+  transform: translate(-50%, -50%) scale(0);
+  transition: all 0s ease-out; }
+
+.tooltip {
+  position: absolute;
+  top: -9.5rem;
+  left: -.5rem;
+  height: 7.5rem;
+  width: 7.5rem;
+  text-align: center;
+  background: #bafcff;
+  color: black;
+  z-index: 5;
+  box-sizing: border-box;
+  border: solid 1px #323232;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+  padding: 5px;
+  line-height: 1.5; }
+  .tooltip::after {
+    content: "";
+    width: 2rem;
+    height: 2rem;
+    background: #bafcff;
+    transform: rotate(-45deg);
+    position: absolute;
+    z-index: 6;
+    bottom: -1.1rem;
+    left: 1rem;
+    border-left: solid 1px #323232;
+    border-bottom: solid 1px #323232; }
 
 html,
 body {
@@ -99,4 +172,5 @@ body {
   box-sizing: border-box;
   height: 70rem;
   border: solid 1px black;
-  margin: 0 auto; }
+  margin: 0 auto;
+  overflow-x: hidden; }

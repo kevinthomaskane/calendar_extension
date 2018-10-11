@@ -1,0 +1,31 @@
+.tooltip {
+  position: absolute;
+  top: -9.5rem;
+  left: -.5rem;
+  height: 7.5rem;
+  width: 7.5rem;
+  text-align: center;
+  background: $lightblue;
+  color: black;
+  z-index: 5;
+  box-sizing: border-box;
+  border: solid 1px $charcoal;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  font-size: 12px;
+  padding: 5px;
+  line-height: 1.5;
+  &::after {
+    content: "";
+    width: 2rem;
+    height: 2rem;
+    background: $lightblue;
+    transform: rotate(-45deg);
+    position: absolute;
+    z-index: 6;
+    bottom: -1.1rem;
+    left: 1rem;
+    border-left: solid 1px $charcoal;
+    border-bottom: solid 1px $charcoal;
+  }
+}

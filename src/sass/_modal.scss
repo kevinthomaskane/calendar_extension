@@ -1,0 +1,53 @@
+.modal {
+  &__container {
+    width: 400px;
+    height: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background: $charcoal;
+    transition: all 0.3s ease-in;
+    transition-delay: .2s;
+    color: white;
+    padding: 10px;
+    border-radius: 2px;
+    z-index: 4;
+    &--header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      &-day {
+        &::first-letter {
+          text-transform: uppercase;
+        }
+      }
+      & div:last-child {
+          cursor: pointer;
+      }
+    }
+  }
+}
+
+.modal-background {
+    z-index: 3;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 100%;
+    height: 100%;
+    transition: all .2s ease-out 0s;
+    background: rgba(254, 254, 254, 0.8);
+    overflow: hidden;
+}
+.show-bg {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.hide-bg{
+    transform: translate(-50%, -50%) scale(0);
+    transition: all 0s ease-out;
+}
+

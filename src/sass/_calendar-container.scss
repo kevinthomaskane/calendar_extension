@@ -1,6 +1,5 @@
 .calendar {
-  width: 22%;
-  height: auto;
+  height: 147px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -41,6 +40,7 @@
     border: solid 1px #f6f6f6;
     background: #f6f6f6;
     cursor: pointer;
+    position: relative;
     &:hover {
       background: rgb(217, 217, 217);
     }
@@ -73,7 +73,7 @@
 }
 
 div[data-fulldate="border"] {
-  border: solid 1px red;
+  background: $lightblue;
 }
 div[data-fulldate="no-border"] {
   border: solid 1px #f6f6f6;

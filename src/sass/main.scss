@@ -1,6 +1,11 @@
+$charcoal: rgb(50, 50, 50);
+$lightblue: rgb(186, 252, 255);
+
 @import "header";
 @import "body";
 @import "calendar-container";
+@import "modal";
+@import "tooltip";
 
 html,
 body {
@@ -15,4 +20,5 @@ body {
   height: 70rem;
   border: solid 1px black;
   margin: 0 auto;
+  overflow-x: hidden;
 }
