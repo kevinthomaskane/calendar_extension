@@ -1,5 +1,5 @@
 $charcoal: rgb(50, 50, 50);
-$lightblue: rgb(186, 252, 255);
+$lightblue: #00c4ff;
 
 @import "header";
 @import "body";
@@ -14,11 +14,12 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-body {
+.App {
   max-width: 95rem;
   box-sizing: border-box;
-  height: 70rem;
+  height: 72rem;
   border: solid 1px black;
   margin: 0 auto;
-  overflow-x: hidden;
+  overflow: hidden;
+  position: relative;
 }

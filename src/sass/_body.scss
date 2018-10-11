@@ -5,5 +5,22 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
   background: $charcoal;
-  height: calc(100% - 38px);
+  height: 62rem;
+
+  &__button {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    padding: 7px;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    box-shadow: 1px 1px 11px 3px black;
+    background: $lightblue;
+    & a {
+      color: white;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    
+  }
 }

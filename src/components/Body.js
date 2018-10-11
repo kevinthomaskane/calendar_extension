@@ -4,11 +4,14 @@ import { connect } from "react-redux";
 
 import Calendar from "./Calendar";
 import Modal from "./Modal";
+import EventsModal from "./EventsModal";
 
 class CalendarContainer extends Component {
   state = {
     selected_date: "",
-    selected_day: ""
+    selected_day: "",
+    show_events: false,
+    show_modal: false
   };
   getDates = (year, month) => {
     const names = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
@@ -29,6 +32,10 @@ class CalendarContainer extends Component {
     this.setState({ show_modal: false, selected_date: "", selected_day: "" });
   };
 
+  closeEvents = () => {
+    this.setState({show_events: false})
+  }
+
   render() {
     const year = this.props.selected_year;
     const months = [];
@@ -43,6 +50,10 @@ class CalendarContainer extends Component {
           show={this.state.show_modal === true ? true : false}
           closeModal={this.closeModal}
         />
+        <EventsModal 
+          show={this.state.show_events === true ? true : false}
+          closeModal={this.closeEvents}
+        />
         <div className="body">
           {months.map((el, i) => {
             const days = this.getDates(year, el);
@@ -55,6 +66,11 @@ class CalendarContainer extends Component {
               />
             );
           })}
+        </div>
+        <div className="body__button">
+          <a href="#" onClick={() => {
+            this.setState({show_events: true})
+          }}>Saved Events</a>
         </div>
       </div>
     );

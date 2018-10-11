@@ -1,3 +1,20 @@
+input,
+button {
+  &:focus {
+    outline: none;
+  }
+}
+
+::-webkit-scrollbar {
+    background: transparent;
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.5);
+  border-radius: 4px;
+}
+
 .modal {
   &__container {
     width: 400px;
@@ -7,47 +24,163 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    background: $charcoal;
+    background: $lightblue;
     transition: all 0.3s ease-in;
-    transition-delay: .2s;
+    transition-delay: 0.2s;
     color: white;
-    padding: 10px;
     border-radius: 2px;
+    overflow: hidden;
     z-index: 4;
     &--header {
       display: flex;
       justify-content: space-between;
       font-size: 16px;
+      background: $charcoal;
+      color: white;
+      padding: 15px;
       &-day {
         &::first-letter {
           text-transform: uppercase;
         }
       }
       & div:last-child {
+        cursor: pointer;
+      }
+    }
+    &--events {
+      margin: 0 auto;
+      &-header {
+        font-size: 20px;
+        margin: 15px;
+        text-align: center;
+      }
+      &-input {
+        width: 250px;
+        height: 35px;
+        border-radius: 2px;
+        overflow: hidden;
+        position: relative;
+        box-sizing: border-box;
+        margin: 0 auto;
+        input {
+          width: 100%;
+          height: 100%;
+          padding: 0 40px 0px 10px;
+          border: none;
+          box-sizing: border-box;
+        }
+        button {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 35px;
+          height: 100%;
+          background: white;
+          color: $lightblue;
+          border: none;
+          border-left: solid 1px $lightblue;
+          font-size: 17px;
           cursor: pointer;
+        }
+      }
+      &-container {
+        ol {
+          margin-top: 15px;
+          height: 135px;
+          overflow: auto;
+          overflow-x: hidden;
+          li {
+            font-size: 20px;
+            margin: 5px;
+            position: relative;
+          }
+        }
+        &-delete {
+          position: absolute;
+          top: -5px;
+          right: 10px;
+          cursor: pointer;
+        }
+      }
+    }
+    &--colors {
+      position: absolute;
+      bottom: 0;
+      height: 100px;
+      width: 100%;
+      background: $charcoal;
+      &-header {
+        font-size: 20px;
+        margin: 15px;
+        text-align: center;
+        color: white;
+      }
+      &-row {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 30px;
+        padding: 0 15px;
+        box-sizing: border-box;
+
+        & > div {
+          width: 30px;
+          height: 100%;
+          box-shadow: 0 2px 4px black;
+          border: solid 1px black;
+          border-radius: 2px;
+          cursor: pointer;
+        }
       }
     }
   }
 }
 
 .modal-background {
-    z-index: 3;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 100%;
-    height: 100%;
-    transition: all .2s ease-out 0s;
-    background: rgba(254, 254, 254, 0.8);
-    overflow: hidden;
+  z-index: 3;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100%;
+  height: 100%;
+  transition: all 0.2s ease-out 0s;
+  background: rgba(254, 254, 254, 0.8);
+  overflow: hidden;
 }
 .show-bg {
-    transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
 }
 
-.hide-bg{
-    transform: translate(-50%, -50%) scale(0);
-    transition: all 0s ease-out;
+.hide-bg {
+  transform: translate(-50%, -50%) scale(0);
+  transition: all 0s ease-out;
 }
 
+.red {
+  background: rgb(254, 43, 43);
+}
+.green {
+  background: rgb(48, 255, 48);
+}
+.blue {
+  background: rgb(48, 48, 255);
+}
+.yellow {
+  background: rgb(255, 255, 78);
+}
+.purple {
+  background: rgb(255, 49, 255);
+}
+.orange {
+  background: rgb(255, 184, 53);
+}
+.default {
+  background: #f6f6f6;
+}
+
+div[data-rgb="default"] {
+  color: black;
+  text-align: center;
+  line-height: 30px;
+}

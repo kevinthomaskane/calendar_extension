@@ -69,13 +69,19 @@ class Calendar extends Component {
             <div>Sat</div>
           </div>
           {days.map((el, i) => {
+            let color_class = "";
+            const {colors} = this.props;
             const full_date =
               this.props.month + "/" + el.num + "/" + this.props.selected_year;
-
+               for (let i = 0; i < colors.length; i++){
+                    if (colors[i].colorobj.date === full_date){
+                        color_class = colors[i].colorobj.color;
+                    }
+               } 
             return (
               <div
                 className={
-                  i === 0 ? `calendar__day ${el.day}` : "calendar__day"
+                  i === 0 ? `calendar__day ${el.day} ${color_class}` : `calendar__day ${color_class}`
                 }
                 data-num={el.num}
                 data-day={el.day}
@@ -114,7 +120,8 @@ Calendar.propTypes = {};
 
 const mapStateToProps = state => ({
   selected_year: state.header.year,
-  current_date: state.calendar.current_date
+  current_date: state.calendar.current_date,
+  colors: state.modal.colors
 });
 
 export default connect(

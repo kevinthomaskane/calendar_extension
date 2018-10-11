@@ -1,20 +1,58 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addEvent, addColor } from "../actions/modal";
+import { addEvent, addColor, removeEvent } from "../actions/modal";
 
 class Modal extends Component {
   state = {
     date: this.props.date,
     day: this.props.day,
     input: "",
-    event_added: false,
-    html_components: []
+    remove: false,
   };
 
   handleInput = e => {
     this.setState({ input: e.target.value });
   };
+
+  chooseColor = e => {
+    if (e.target !== e.currentTarget) {
+      const color = e.target.getAttribute("data-rgb");
+      const { colors, date } = this.props;
+      const obj = {
+        colorobj: {
+          date: date,
+          color: color
+        }
+      };
+      if (colors.length > 0) {
+        let found = false;
+        for (let i = 0; i < colors.length; i++){
+          if (colors[i].colorobj.date === date){
+            colors[i].colorobj.color = color;
+            found = true;
+            this.props.addColor(colors)
+            i = colors.length;
+          }
+        }
+        if (!found){
+          colors.push(obj)
+          this.props.addColor(colors)
+        }
+      } else {
+        colors.push(obj)
+        this.props.addColor(colors)
+      }
+    }
+    this.props.closeModal();
+  };
+
+  removeEvent = () => {
+    const new_events = this.props.events.filter((el) => {
+      return el.eventobj.date !== this.props.date
+    })
+    this.props.removeEvent(new_events)
+  }
 
   render() {
     const { events, colors, date, day } = this.props;
@@ -37,7 +75,12 @@ class Modal extends Component {
           <div className="modal__container--events">
             <div className="modal__container--events-header">Your Events</div>
             <div className="modal__container--events-input">
-              <input type="text" onChange={this.handleInput} />
+              <input
+                type="text"
+                placeholder="add an event"
+                value={this.state.input}
+                onChange={this.handleInput}
+              />
               <button
                 onClick={() => {
                   if (this.state.input.length > 0) {
@@ -54,16 +97,19 @@ class Modal extends Component {
                           found = true;
                           events[i].eventobj.events.push(this.state.input);
                           this.props.addEvent(events);
+                          this.setState({input: ""})
                           i = events.length;
-                        } 
+                        }
                       }
-                      if (!found){
+                      if (!found) {
                         events.push(obj);
-                          this.props.addEvent(events);
+                        this.props.addEvent(events);
+                        this.setState({input: ""})
                       }
                     } else {
                       events.push(obj);
                       this.props.addEvent(events);
+                      this.setState({input: ""})
                     }
                   }
                 }}
@@ -72,25 +118,45 @@ class Modal extends Component {
               </button>
             </div>
             <div className="modal__container--events-container">
-              {events
-                .filter(parent => {
-                  let date = parent.eventobj.date;
-                  return parent.eventobj.date === this.props.date;
-                })
-                .map(el => {
-                  return el.eventobj.events.map(item => {
-                    return (
-                      <div
-                        className="modal__container--events-container-item"
-                        data-id={item}
-                        data-date={date}
-                        key={item}
-                      >
-                        {item}
-                      </div>
-                    );
-                  });
-                })}
+              <ol>
+                {events
+                  .filter(parent => {
+                    let date = parent.eventobj.date;
+                    return parent.eventobj.date === this.props.date;
+                  })
+                  .map(el => {
+                    return el.eventobj.events.map(item => {
+                      return (
+                        <li
+                          className="modal__container--events-container-item"
+                          data-id={item}
+                          data-date={date}
+                          key={item}
+                        >
+                          {item}
+                          <span className="modal__container--events-container-delete" onClick={this.removeEvent}>&times;</span>
+                        </li>
+                      );
+                    });
+                  })}
+              </ol>
+            </div>
+            <div className="modal__container--colors">
+              <div className="modal__container--colors-header">
+                Choose a color for this day
+              </div>
+              <div
+                className="modal__container--colors-row"
+                onClick={this.chooseColor}
+              >
+                <div className="red" data-rgb="red" />
+                <div className="green" data-rgb="green" />
+                <div className="blue" data-rgb="blue" />
+                <div className="yellow" data-rgb="yellow" />
+                <div className="purple" data-rgb="purple" />
+                <div className="orange" data-rgb="orange" />
+                <div className="default" data-rgb="default">none</div>
+              </div>
             </div>
           </div>
         </div>
@@ -101,7 +167,8 @@ class Modal extends Component {
 
 Modal.propTypes = {
   addColor: PropTypes.func.isRequired,
-  addEvent: PropTypes.func.isRequired
+  addEvent: PropTypes.func.isRequired,
+  removeEvent: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -112,5 +179,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addColor, addEvent }
+  { addColor, addEvent, removeEvent }
 )(Modal);
