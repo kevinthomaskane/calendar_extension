@@ -27,7 +27,7 @@ a[data-rgb="default"] {
 span.red, span.green, span.blue, span.yellow, span.purple, span.orange, span.default {
   display: block;
   position: absolute;
-  top: 11px;
+  top: 10px;
   left: -19px;
   width: 10px;
   height: 10px;
@@ -57,12 +57,39 @@ span.red, span.green, span.blue, span.yellow, span.purple, span.orange, span.def
 .header {
   display: flex;
   justify-content: space-evenly;
-  background: #00c4ff; }
+  background: #00c4ff;
+  position: relative; }
   .header__year {
     padding: 1rem;
     color: white;
     font-size: 1.6rem;
     text-decoration: none; }
+  .header .before {
+    position: absolute;
+    top: 13px;
+    left: 10px;
+    width: 10px;
+    height: 10px;
+    border-top: solid 2px white;
+    border-left: solid 2px white;
+    background: transparent;
+    transform: rotate(-45deg);
+    cursor: pointer; }
+  .header .after {
+    position: absolute;
+    top: 13px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    border-top: solid 2px white;
+    border-right: solid 2px white;
+    background: transparent;
+    transform: rotate(45deg);
+    cursor: pointer; }
+  .header .bold-header {
+    color: black;
+    font-weight: 700;
+    text-decoration: underline; }
 
 .body {
   padding: 1.5rem;
@@ -141,7 +168,7 @@ span.red, span.green, span.blue, span.yellow, span.purple, span.orange, span.def
     font-size: 1.6rem;
     font-weight: 300;
     color: white; }
-  .calendar__day {
+  .calendar .calendar__day {
     width: calc((100% / 7) - 4px);
     height: 1.8rem;
     margin: 1px;
@@ -150,9 +177,9 @@ span.red, span.green, span.blue, span.yellow, span.purple, span.orange, span.def
     background: #f6f6f6;
     cursor: pointer;
     position: relative; }
-    .calendar__day:hover {
+    .calendar .calendar__day:hover {
       background: #d9d9d9; }
-    .calendar__day--number {
+    .calendar .calendar__day--number {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -172,7 +199,7 @@ span.red, span.green, span.blue, span.yellow, span.purple, span.orange, span.def
   .calendar .default {
     background: #f6f6f6; }
   .calendar div[data-fulldate="border"] {
-    background: #00c4ff; }
+    border: solid 1px black; }
   .calendar div[data-fulldate="no-border"] {
     border: solid 1px #f6f6f6; }
 
@@ -337,6 +364,21 @@ button:focus {
   line-height: 27px;
   border-radius: 4px;
   font-weight: 300; }
+
+body li[data-before="before-element"] {
+  margin-top: 65px; }
+  body li[data-before="before-element"]::before {
+    content: "Past Items";
+    position: absolute;
+    width: 400px;
+    padding: 5px;
+    padding-right: 15px;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 16px;
+    text-align: center; }
 
 .tooltip {
   position: absolute;

@@ -33,7 +33,7 @@
     font-weight: 300;
     color: white;
   }
-  &__day {
+  .calendar__day {
     width: calc((100% / 7) - 4px);
     height: 1.8rem;
     margin: 1px;
@@ -74,7 +74,7 @@
     background: $default;
   }
   div[data-fulldate="border"] {
-    background: $lightblue;
+    border: solid 1px black;
   }
   div[data-fulldate="no-border"] {
     border: solid 1px #f6f6f6;

@@ -13,7 +13,6 @@ class Header extends Component {
     this.getDateRange(this.state.selected_year).then(range => {
       this.props.changeYear(this.state.selected_year);
       this.props.changeRange(range);
-      this.activeYear(this.state.selected_year)
     });
   }
 
@@ -32,26 +31,27 @@ class Header extends Component {
     });
   };
 
-  activeYear = (el) => {
-    const element = document.querySelector(`a[data-year="${el}"]`)
-    element.setAttribute("style", "color: black; font-weight: 700; text-decoration: underline;")
-  }
-
   render() {
     return (
       <div className="header">
+        <div className="before" onClick={() => {
+          const new_year = this.props.years_range[0] - 4;
+          this.getDateRange(new_year).then(range => {
+            this.props.changeRange(range)
+          })
+        }}></div>
         {this.state.year_range.map((el, i) => {
+          const header_class = this.props.selected_year === el ? "bold-header" : ""
           return (
             <a
               href="#"
-              className="header__year"
+              className={"header__year " + header_class}
               key={i}
               data-year={el}
               onClick={() => {
                 this.getDateRange(el).then(range => {
                   this.props.changeYear(el);
                   this.props.changeRange(range);
-                  this.activeYear(el);
                 });
               }}
             >
@@ -59,6 +59,12 @@ class Header extends Component {
             </a>
           );
         })}
+         <div className="after" onClick={() => {
+          const new_year = this.props.years_range[this.props.years_range.length - 1] + 4;
+          this.getDateRange(new_year).then(range => {
+            this.props.changeRange(range)
+          })
+        }}></div>
       </div>
     );
   }

@@ -37,9 +37,21 @@ class EventsModal extends Component {
     return "default";
   };
 
+  beforeElement = (index, arr, bool) => {
+    console.log(1)
+    console.log(arr.length)
+    if (bool && arr.length === 1){
+      
+      return "before-element"
+    } 
+    return "";
+  }
+
   render() {
     const bg = this.props.show === true ? "show-bg" : "hide-bg";
     const { events } = this.props;
+    let sinces = [];
+    let untils = false;
     for (let i = 1; i < events.length; i++) {
       let tmp;
       let another_tmp;
@@ -93,18 +105,26 @@ class EventsModal extends Component {
             <ol className="large-list">
               {events.map(el => {
                 let date = el.eventobj.date;
+                
                 const current_date = this.props.current_date;
                 const selected_date = date;
                 const diff = Math.floor(
                   (Date.parse(selected_date) - Date.parse(current_date)) /
                     86400000
                 );
-                const verbage = diff > 0 ? "until" : "since";
+                const verbage = diff >= 0 ? "until" : "since";
+                if (verbage === "since"){
+                  sinces.push(1)
+                } else {
+                  untils = true;
+                }
+                
                 const days_verbage = Math.abs(diff) === 1 ? "day" : "days";
-                return el.eventobj.events.map(item => {
+                return el.eventobj.events.map((item, i) => {
                   return (
                     <li
                       className="modal__container--events-container-item"
+                      data-before={this.beforeElement(i, sinces, untils)}
                       data-id={item}
                       data-date={date}
                       key={item}

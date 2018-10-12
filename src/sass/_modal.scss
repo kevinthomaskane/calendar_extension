@@ -161,7 +161,6 @@ button {
   transition: all 0s ease-out;
 }
 
-
 // event list modal ===================================================================================================
 .date-span {
   font-size: 12px;
@@ -174,4 +173,22 @@ button {
   line-height: 27px;
   border-radius: 4px;
   font-weight: 300;
+}
+
+body li[data-before="before-element"] {
+  margin-top: 65px;
+  &::before {
+    content: "Past Items";
+    position: absolute;
+    width: 400px;
+    padding: 5px;
+    padding-right: 15px;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    
+  }
 }
