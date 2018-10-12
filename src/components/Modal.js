@@ -54,6 +54,15 @@ class Modal extends Component {
     this.props.removeEvent(new_events)
   }
 
+  getBullet = (date) => {
+    for (let i = 0; i < this.props.colors.length; i++){
+      if (date === this.props.colors[i].colorobj.date){
+        return this.props.colors[i].colorobj.color
+      }
+    }
+    return "default"
+  }
+
   render() {
     const { events, colors, date, day } = this.props;
     const bg = this.props.show === true ? "show-bg" : "hide-bg";
@@ -133,6 +142,7 @@ class Modal extends Component {
                           data-date={date}
                           key={item}
                         >
+                          <span className={this.getBullet(date)}></span>
                           {item}
                           <span className="modal__container--events-container-delete" onClick={this.removeEvent}>&times;</span>
                         </li>
@@ -149,13 +159,13 @@ class Modal extends Component {
                 className="modal__container--colors-row"
                 onClick={this.chooseColor}
               >
-                <div className="red" data-rgb="red" />
-                <div className="green" data-rgb="green" />
-                <div className="blue" data-rgb="blue" />
-                <div className="yellow" data-rgb="yellow" />
-                <div className="purple" data-rgb="purple" />
-                <div className="orange" data-rgb="orange" />
-                <div className="default" data-rgb="default">none</div>
+                <a className="red" data-rgb="red" />
+                <a className="green" data-rgb="green" />
+                <a className="blue" data-rgb="blue" />
+                <a className="yellow" data-rgb="yellow" />
+                <a className="purple" data-rgb="purple" />
+                <a className="orange" data-rgb="orange" />
+                <a className="default" data-rgb="default">none</a>
               </div>
             </div>
           </div>

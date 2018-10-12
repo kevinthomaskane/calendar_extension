@@ -1,6 +1,4 @@
-$charcoal: rgb(50, 50, 50);
-$lightblue: #00c4ff;
-
+@import "colors";
 @import "header";
 @import "body";
 @import "calendar-container";
@@ -12,6 +10,9 @@ body {
   font-size: 62.5%;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
+  .large-list {
+    height: 300px;
+  }
 }
 
 .App {
@@ -22,4 +23,8 @@ body {
   margin: 0 auto;
   overflow: hidden;
   position: relative;
+}
+
+a:active {
+  transform: translateY(1px);
 }

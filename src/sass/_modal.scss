@@ -6,12 +6,12 @@ button {
 }
 
 ::-webkit-scrollbar {
-    background: transparent;
-    width: 5px;
+  background: transparent;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 4px;
 }
 
@@ -89,16 +89,20 @@ button {
           height: 135px;
           overflow: auto;
           overflow-x: hidden;
+          list-style: none;
+          padding-right: 30px;
           li {
-            font-size: 20px;
+            font-size: 18px;
             margin: 5px;
             position: relative;
+            margin: 13px;
+            line-height: 27px;
           }
         }
         &-delete {
           position: absolute;
-          top: -5px;
-          right: 10px;
+          top: 0;
+          right: -20px;
           cursor: pointer;
         }
       }
@@ -123,7 +127,7 @@ button {
         padding: 0 15px;
         box-sizing: border-box;
 
-        & > div {
+        & > a {
           width: 30px;
           height: 100%;
           box-shadow: 0 2px 4px black;
@@ -157,30 +161,17 @@ button {
   transition: all 0s ease-out;
 }
 
-.red {
-  background: rgb(254, 43, 43);
-}
-.green {
-  background: rgb(48, 255, 48);
-}
-.blue {
-  background: rgb(48, 48, 255);
-}
-.yellow {
-  background: rgb(255, 255, 78);
-}
-.purple {
-  background: rgb(255, 49, 255);
-}
-.orange {
-  background: rgb(255, 184, 53);
-}
-.default {
-  background: #f6f6f6;
+
+// event list modal ===================================================================================================
+.date-span {
+  font-size: 12px;
 }
 
-div[data-rgb="default"] {
+.event-list-item {
+  padding: 5px;
   color: black;
-  text-align: center;
-  line-height: 30px;
+  white-space: pre-wrap;
+  line-height: 27px;
+  border-radius: 4px;
+  font-weight: 300;
 }

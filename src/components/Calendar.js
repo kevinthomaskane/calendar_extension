@@ -69,13 +69,20 @@ class Calendar extends Component {
             <div>Sat</div>
           </div>
           {days.map((el, i) => {
-            let color_class = "";
+            let color_class = "default";
+            let filter = false;
             const {colors} = this.props;
             const full_date =
               this.props.month + "/" + el.num + "/" + this.props.selected_year;
                for (let i = 0; i < colors.length; i++){
                     if (colors[i].colorobj.date === full_date){
-                        color_class = colors[i].colorobj.color;
+                        if (this.props.filter && colors[i].colorobj.color === this.props.color){
+                            color_class = colors[i].colorobj.color;
+                            filter = true;
+                        }   
+                        if (!filter && !this.props.filter){
+                            color_class = colors[i].colorobj.color;
+                        }
                     }
                } 
             return (

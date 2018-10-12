@@ -17,8 +17,8 @@ class EventsModal extends Component {
       for (let j = 0; j < child.length; j++) {
         if (child[j] === item) {
           child.splice(j, 1);
-          if (child.length === 0){
-            events.splice(i, 1)
+          if (child.length === 0) {
+            events.splice(i, 1);
             this.props.removeEvent(events);
           }
           this.props.removeEvent(events);
@@ -28,20 +28,53 @@ class EventsModal extends Component {
       }
     }
   };
+  getBullet = date => {
+    for (let i = 0; i < this.props.colors.length; i++) {
+      if (date === this.props.colors[i].colorobj.date) {
+        return this.props.colors[i].colorobj.color;
+      }
+    }
+    return "default";
+  };
 
   render() {
     const bg = this.props.show === true ? "show-bg" : "hide-bg";
     const { events } = this.props;
-    for (let i = 1; i < events.length; i++){
+    for (let i = 1; i < events.length; i++) {
       let tmp;
-      for (let j = 0; j < i; j++){
-        if (Date.parse(events[i].eventobj.date) > Date.parse(events[j].eventobj.date)){
+      let another_tmp;
+      for (let j = 0; j < i; j++) {
+        if (
+          Date.parse(events[i].eventobj.date) >
+            Date.parse(events[j].eventobj.date) &&
+          Date.parse(events[i].eventobj.date) >= Date.parse(new Date()) &&
+          Date.parse(events[j].eventobj.date) <= Date.parse(new Date())
+        ) {
           tmp = events[i];
           events[i] = events[j];
           events[j] = tmp;
-        }
+        } else if (
+          Date.parse(events[i].eventobj.date) >
+            Date.parse(events[j].eventobj.date) &&
+          Date.parse(events[i].eventobj.date) <= Date.parse(new Date()) &&
+          Date.parse(events[j].eventobj.date) <= Date.parse(new Date())
+        ) {
+          tmp = events[i];
+          events[i] = events[j];
+          events[j] = tmp;
+        } 
       }
     }
+    for (let i = 0; i < events.length; i++){
+      let tmp;
+      if (events[i].eventobj.date === this.props.current_date){
+      
+        tmp = events[i];
+        events.splice(i,1);
+        events.unshift(tmp)
+      }
+    }
+   
     return (
       <div className={"modal-background " + bg}>
         <div className="modal__container">
@@ -58,7 +91,7 @@ class EventsModal extends Component {
             </div>
           </div>
           <div className="modal__container--events-container">
-            <ol>
+            <ol className="large-list">
               {events.map(el => {
                 let date = el.eventobj.date;
                 const current_date = this.props.current_date;
@@ -77,7 +110,18 @@ class EventsModal extends Component {
                       data-date={date}
                       key={item}
                     >
-                      {Math.abs(diff)} {days_verbage} {verbage} {item} ({date})
+                      <span className="date-span">
+                        {Math.abs(diff)} {days_verbage} {verbage}
+                      </span>{" "}
+                      <span
+                        className={
+                          this.getBullet(date) + "-text event-list-item"
+                        }
+                      >
+                        {item}
+                      </span>{" "}
+                      <span className="date-span">({date})</span>
+                      <span className={this.getBullet(date)} />
                       <span
                         className="modal__container--events-container-delete"
                         onClick={() => {
@@ -102,7 +146,8 @@ EventsModal.propTypes = {};
 
 const mapStateToProps = state => ({
   events: state.modal.events,
-  current_date: state.calendar.current_date
+  current_date: state.calendar.current_date,
+  colors: state.modal.colors
 });
 
 export default connect(

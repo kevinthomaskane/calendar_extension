@@ -6,7 +6,6 @@ import Header from './components/Header';
 import Body from "./components/Body";
 
 const year = new Date().getFullYear();
-const current_date = new Date().toLocaleDateString("en-US");
 
 class App extends Component {
 

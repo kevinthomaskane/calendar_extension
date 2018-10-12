@@ -11,7 +11,9 @@ class CalendarContainer extends Component {
     selected_date: "",
     selected_day: "",
     show_events: false,
-    show_modal: false
+    show_modal: false,
+    filter: false,
+    color: "default"
   };
   getDates = (year, month) => {
     const names = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
@@ -33,8 +35,23 @@ class CalendarContainer extends Component {
   };
 
   closeEvents = () => {
-    this.setState({show_events: false})
-  }
+    this.setState({ show_events: false });
+  };
+
+  chooseColor = e => {
+    if (e.target !== e.currentTarget) {
+      const color = e.target.getAttribute("data-rgb");
+      if (color === "default") {
+        this.setState({ filter: false, color: "default" });
+      } else {
+        this.setState({ filter: true, color: color });
+      }
+    }
+  };
+
+  resetFilter = () => {
+    this.setState({ filter: false, color: "default" });
+  };
 
   render() {
     const year = this.props.selected_year;
@@ -50,7 +67,7 @@ class CalendarContainer extends Component {
           show={this.state.show_modal === true ? true : false}
           closeModal={this.closeModal}
         />
-        <EventsModal 
+        <EventsModal
           show={this.state.show_events === true ? true : false}
           closeModal={this.closeEvents}
         />
@@ -63,14 +80,37 @@ class CalendarContainer extends Component {
                 days={days}
                 key={i}
                 month={el}
+                filter={this.state.filter ? true : false}
+                color={
+                  this.state.color !== "default" ? this.state.color : "default"
+                }
               />
             );
           })}
         </div>
-        <div className="body__button">
-          <a href="#" onClick={() => {
-            this.setState({show_events: true})
-          }}>Saved Events</a>
+        <div className="footer">
+          <div className="footer__filters" onClick={this.chooseColor}>
+            <a className="footer__filters--header">Filter By:</a>
+            <a className="red" data-rgb="red" />
+            <a className="green" data-rgb="green" />
+            <a className="blue" data-rgb="blue" />
+            <a className="yellow" data-rgb="yellow" />
+            <a className="purple" data-rgb="purple" />
+            <a className="orange" data-rgb="orange" />
+            <a className="default" data-rgb="default">
+              reset 
+            </a>
+          </div>
+          <div className="footer__button">
+            <a
+              href="#"
+              onClick={() => {
+                this.setState({ show_events: true });
+              }}
+            >
+              Saved Events
+            </a>
+          </div>
         </div>
       </div>
     );
