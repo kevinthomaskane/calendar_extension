@@ -127,6 +127,12 @@ span.red, span.green, span.blue, span.yellow, span.purple, span.orange, span.def
         box-shadow: none;
         font-size: 16px;
         line-height: 26px; }
+      .footer__filters > a.selected {
+        transform: none;
+        box-shadow: none;
+        transition: all 0s; }
+        .footer__filters > a.selected:active {
+          transform: none; }
   .footer__button {
     border-radius: 2px;
     padding: 5px;
@@ -202,24 +208,18 @@ span.red, span.green, span.blue, span.yellow, span.purple, span.orange, span.def
     border: solid 1px black; }
   .calendar div[data-fulldate="no-border"] {
     border: solid 1px #f6f6f6; }
-
-.mon {
-  margin-left: calc((100% / 7) + 1px); }
-
-.tue {
-  margin-left: calc(((100% / 7) * 2) + 1px); }
-
-.wed {
-  margin-left: calc(((100% / 7) * 3) + 1px); }
-
-.thu {
-  margin-left: calc(((100% / 7) * 4) + 1px); }
-
-.fri {
-  margin-left: calc(((100% / 7) * 5) + 1px); }
-
-.sat {
-  margin-left: calc(((100% / 7) * 6) + 1px); }
+  .calendar .mon {
+    margin-left: calc((100% / 7) + 1px); }
+  .calendar .tue {
+    margin-left: calc(((100% / 7) * 2) + 1px); }
+  .calendar .wed {
+    margin-left: calc(((100% / 7) * 3) + 1px); }
+  .calendar .thu {
+    margin-left: calc(((100% / 7) * 4) + 1px); }
+  .calendar .fri {
+    margin-left: calc(((100% / 7) * 5) + 1px); }
+  .calendar .sat {
+    margin-left: calc(((100% / 7) * 6) + 1px); }
 
 input:focus,
 button:focus {
@@ -429,4 +429,4 @@ body {
   position: relative; }
 
 a:active {
-  transform: translateY(1px); }
+  box-shadow: none; }
