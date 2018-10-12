@@ -68,7 +68,6 @@ class EventsModal extends Component {
     for (let i = 0; i < events.length; i++){
       let tmp;
       if (events[i].eventobj.date === this.props.current_date){
-      
         tmp = events[i];
         events.splice(i,1);
         events.unshift(tmp)

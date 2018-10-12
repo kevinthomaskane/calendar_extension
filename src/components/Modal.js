@@ -47,11 +47,24 @@ class Modal extends Component {
     this.props.closeModal();
   };
 
-  removeEvent = () => {
-    const new_events = this.props.events.filter((el) => {
-      return el.eventobj.date !== this.props.date
-    })
-    this.props.removeEvent(new_events)
+  removeEvent = (item) => {
+    const {events} = this.props
+    for (let i = 0; i < events.length; i++){
+      console.log("here")
+      if (events[i].eventobj.date === this.props.date){
+        for (let j = 0; j < events[i].eventobj.events.length; j++){
+          if (events[i].eventobj.events[j] === item){
+            events[i].eventobj.events.splice(j,1);
+            this.props.removeEvent(events)
+            this.setState({remove: !this.state.remove})
+          }
+        }
+      }
+    }
+    // const new_events = this.props.events.filter((el) => {
+    //   return el.eventobj.date !== this.props.date
+    // })
+    // this.props.removeEvent(new_events)
   }
 
   getBullet = (date) => {
@@ -144,7 +157,7 @@ class Modal extends Component {
                         >
                           <span className={this.getBullet(date)}></span>
                           {item}
-                          <span className="modal__container--events-container-delete" onClick={this.removeEvent}>&times;</span>
+                          <span className="modal__container--events-container-delete" onClick={() => {this.removeEvent(item)}}>&times;</span>
                         </li>
                       );
                     });
