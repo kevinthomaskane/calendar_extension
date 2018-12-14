@@ -52,6 +52,7 @@ class Header extends Component {
                 this.getDateRange(el).then(range => {
                   this.props.changeYear(el);
                   this.props.changeRange(range);
+                  this.setState({selected_year: el})
                 });
               }}
             >

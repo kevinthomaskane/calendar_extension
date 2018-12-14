@@ -79,23 +79,24 @@
   div[data-fulldate="no-border"] {
     border: solid 1px #f6f6f6;
   }
+  .mon {
+    margin-left: calc((100% / 7) + 1px);
+  }
+  .tue {
+    margin-left: calc(((100% / 7) * 2) + 1px);
+  }
+  .wed {
+    margin-left: calc(((100% / 7) * 3) + 1px);
+  }
+  .thu {
+    margin-left: calc(((100% / 7) * 4) + 1px);
+  }
+  .fri {
+    margin-left: calc(((100% / 7) * 5) + 1px);
+  }
+  .sat {
+    margin-left: calc(((100% / 7) * 6) + 1px);
+  }
 }
 
-.mon {
-  margin-left: calc((100% / 7) + 1px);
-}
-.tue {
-  margin-left: calc(((100% / 7) * 2) + 1px);
-}
-.wed {
-  margin-left: calc(((100% / 7) * 3) + 1px);
-}
-.thu {
-  margin-left: calc(((100% / 7) * 4) + 1px);
-}
-.fri {
-  margin-left: calc(((100% / 7) * 5) + 1px);
-}
-.sat {
-  margin-left: calc(((100% / 7) * 6) + 1px);
-}
+

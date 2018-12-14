@@ -91,12 +91,12 @@ class CalendarContainer extends Component {
         <div className="footer">
           <div className="footer__filters" onClick={this.chooseColor}>
             <a className="footer__filters--header">Filter By:</a>
-            <a className="red" data-rgb="red" />
-            <a className="green" data-rgb="green" />
-            <a className="blue" data-rgb="blue" />
-            <a className="yellow" data-rgb="yellow" />
-            <a className="purple" data-rgb="purple" />
-            <a className="orange" data-rgb="orange" />
+            <a className={this.state.color === "red" ? "red selected" : "red"} data-rgb="red" />
+            <a className={this.state.color ==="green" ? "green selected" : "green"} data-rgb="green" />
+            <a className={this.state.color === "blue" ? "blue selected" : "blue"} data-rgb="blue" />
+            <a className={this.state.color === "yellow" ? "yellow selected" : "yellow"} data-rgb="yellow" />
+            <a className={this.state.color === "purple" ? "purple selected" : "purple"} data-rgb="purple" />
+            <a className={this.state.color === "orange" ? "orange selected" : "orange"} data-rgb="orange" />
             <a className="default" data-rgb="default">
               reset 
             </a>

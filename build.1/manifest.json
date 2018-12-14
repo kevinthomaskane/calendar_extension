@@ -1,6 +1,6 @@
 {
   "name": "Countdown Calendar and Planner",
-  "version": "1.3",
+  "version": "1.4",
   "description": "Countdown to certain events, make plans, and organize your schedule!",
   "permissions": ["activeTab"],
   "browser_action": {

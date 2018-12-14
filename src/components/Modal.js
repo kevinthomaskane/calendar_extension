@@ -50,7 +50,6 @@ class Modal extends Component {
   removeEvent = (item) => {
     const {events} = this.props
     for (let i = 0; i < events.length; i++){
-      console.log("here")
       if (events[i].eventobj.date === this.props.date){
         for (let j = 0; j < events[i].eventobj.events.length; j++){
           if (events[i].eventobj.events[j] === item){
@@ -61,10 +60,6 @@ class Modal extends Component {
         }
       }
     }
-    // const new_events = this.props.events.filter((el) => {
-    //   return el.eventobj.date !== this.props.date
-    // })
-    // this.props.removeEvent(new_events)
   }
 
   getBullet = (date) => {
@@ -74,6 +69,38 @@ class Modal extends Component {
       }
     }
     return "default"
+  }
+
+  handleEventAdd = (events, date) => {
+    if (this.state.input.length > 0) {
+      const obj = {
+        eventobj: {
+          date: date,
+          events: [this.state.input]
+        }
+      };
+      if (events.length > 0) {
+        let found = false;
+        for (let i = 0; i < events.length; i++) {
+          if (events[i].eventobj.date === date) {
+            found = true;
+            events[i].eventobj.events.push(this.state.input);
+            this.props.addEvent(events);
+            this.setState({input: ""})
+            i = events.length;
+          }
+        }
+        if (!found) {
+          events.push(obj);
+          this.props.addEvent(events);
+          this.setState({input: ""})
+        }
+      } else {
+        events.push(obj);
+        this.props.addEvent(events);
+        this.setState({input: ""})
+      }
+    }
   }
 
   render() {
@@ -105,35 +132,7 @@ class Modal extends Component {
               />
               <button
                 onClick={() => {
-                  if (this.state.input.length > 0) {
-                    const obj = {
-                      eventobj: {
-                        date: date,
-                        events: [this.state.input]
-                      }
-                    };
-                    if (events.length > 0) {
-                      let found = false;
-                      for (let i = 0; i < events.length; i++) {
-                        if (events[i].eventobj.date === date) {
-                          found = true;
-                          events[i].eventobj.events.push(this.state.input);
-                          this.props.addEvent(events);
-                          this.setState({input: ""})
-                          i = events.length;
-                        }
-                      }
-                      if (!found) {
-                        events.push(obj);
-                        this.props.addEvent(events);
-                        this.setState({input: ""})
-                      }
-                    } else {
-                      events.push(obj);
-                      this.props.addEvent(events);
-                      this.setState({input: ""})
-                    }
-                  }
+                  this.handleEventAdd(events, date)
                 }}
               >
                 +
@@ -170,7 +169,10 @@ class Modal extends Component {
               </div>
               <div
                 className="modal__container--colors-row"
-                onClick={this.chooseColor}
+                onClick={(e) => {
+                  this.handleEventAdd(events, date)
+                  this.chooseColor(e)
+                }}
               >
                 <a className="red" data-rgb="red" />
                 <a className="green" data-rgb="green" />
