@@ -1,6 +1,7 @@
 .calendar {
   height: 147px;
-  width: 200px;
+  // this is what is needed for chrome's size
+  width: 160px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
